@@ -1,0 +1,42 @@
+// To run test use npm test from  root folder
+// Make sure the app is running on 3001 port before you run npm test
+
+var url = 'http://localhost:3001';
+const request = require('supertest')(url);
+const express = require('express');
+var assert = require('assert');
+var mocha = require('mocha');
+var fileRoute =  require('./../routes/file');
+
+const app = express();
+
+describe('File test', function() {
+    it('Write Positive Test scenario ', function(done) {
+        var req = request.get('/file/write');
+        req.set('Accept', 'application/json');
+        req.end(function(err, res) {
+            if(err){
+                console.log(err);
+            }
+            var response = res.text;
+            console.log('response', response);
+            done();
+        });
+    });
+});
+
+describe('File test', function() {
+    it('Read Positive Read Test scenario ', function(done) {
+        var req = request.get('/file/read');
+        req.set('Accept', 'application/json');
+        req.end(function(err, res) {
+            if(err){
+                console.log(err);
+            }
+            var response = res.text;
+            console.log('response', response);
+            done();
+        });
+    });
+});
+
